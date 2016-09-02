@@ -1,7 +1,3 @@
-邮编条码转换 ---------命令行版
-
-
-
 * <https://en.wikipedia.org/wiki/POSTNET>
 * <https://www.cs.drexel.edu/~introcs/Fa12/assignments/HW4/index.html>
 * <http://www.jiskha.com/>

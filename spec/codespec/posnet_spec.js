@@ -2,7 +2,7 @@
  * Created by lucky on 16-7-28.
  */
 /*global require*/
-const obj = require("../../shixian/posnet.js");
+const obj = require("../../src/posnet.js");
 
 //条形码->邮编
 describe("IsLegal", function () {
@@ -124,6 +124,14 @@ describe("checkBit", function () {
     });
 });
 
+describe("isInvalidZipCodes",function () {
+    it("judge the zipCode ",function () {
+        let zipCodes='45678-9032';
+        let result=obj.isInvalidZipCodes(zipCodes);
+        expect(result).toEqual(true);
+    });
+});
+
 describe("getCodeLists", function () {
     it("get number's barcode", function () {
         let expected = ['||:::', ':::||', '::|:|', '::||:', ':|::|', ':|:|:', ':||::', '|:::|', '|::|:', '|:|::'];
@@ -174,7 +182,7 @@ describe("matchBarCodes", function () {
 describe("addBarFrame", function () {
     it("add bar frame", function () {
         let newBarCodes = "::|:|::||::|::|:|:|::||::||:::";
-        let expected = "| ::|:|::||::|::|:|:|::||::||::: |";
+        let expected = "|::|:|::||::|::|:|:|::||::||:::|";
         let result = obj.addBarFrame(newBarCodes);
         expect(result).toEqual(expected);
     });

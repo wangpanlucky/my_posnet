@@ -71,7 +71,7 @@ function finalFormat(zipCodes) {
 
 function covertToZipCodes(barCodes) {
     if (!IsLegal(barCodes) && !isHaveBarFrame(barCodes)) {
-        return undefined;
+        return "Please check your  barCodes,your input wrong!!!!!";
     }
     let codeList = getCodeList();
     let modifiedBarCodes = deleteFrame(barCodes);
@@ -90,6 +90,13 @@ function covertToZipCodes(barCodes) {
 //邮编->条形码
 function checkBit(zipCodes) {
     return zipCodes.length === 5 || zipCodes.length === 9 || zipCodes.length === 10;
+}
+
+function isInvalidZipCodes(zipCodes) {
+    let result=zipCodes.split('');
+    return result.every(function (element) {
+        return !(isNaN(element)&&element!=='-');
+    });
 }
 
 function getCodeLists() {
@@ -135,9 +142,8 @@ function addBarFrame(newBarCodes) {
 }
 
 function covertToBarcode(zipCodes) {
-    let isTrue = checkBit(zipCodes);
-    if (!isTrue) {
-        return undefined;
+    if (!(checkBit(zipCodes)&&isInvalidZipCodes(zipCodes))) {
+        return "please check your zipCodes,the input wrong!!!!!";
     }
     let codeList = getCodeLists();
     let modifiedCodes = formatCodes(zipCodes);
@@ -162,6 +168,7 @@ module.exports = {IsLegal: IsLegal,
     finalFormat: finalFormat,
     covertToZipCodes: covertToZipCodes,
     checkBit: checkBit,
+    isInvalidZipCodes:isInvalidZipCodes,
     getCodeLists: getCodeLists,
     formatCodes: formatCodes,
     calculateCd: calculateCd,
